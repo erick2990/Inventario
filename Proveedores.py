@@ -55,7 +55,7 @@ class GestionProveedores:
             gestor_categorias.mostrar_categorias() #muestra las categorias disponibles
             while True:
                 print('Presione 0 para finalizar la asociación')
-                cat_asociada = input('\nIngrese la categoria que desea asociar: ').strip()
+                cat_asociada = int(input('\nIngrese la categoria que desea asociar: '))
                 if cat_asociada in gestor_categorias.diccionario_cat.keys(): #se verifica si esta en las llaves
                    categroria_objeto = gestor_categorias.diccionario_cat[cat_asociada]
                    if proveedor_tmp in categroria_objeto.listado_proveedores:
