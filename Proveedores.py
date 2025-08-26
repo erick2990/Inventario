@@ -63,7 +63,7 @@ class GestionProveedores:
                    else:
                        categroria_objeto.agregar_proveedor_categoria(proveedor_tmp) #Se envia el objeto proveedor para ser guardado
                        print('¡¡¡Proveedor asociado con exito!!!\n')
-                if cat_asociada== "0":
+                if cat_asociada== 0:
                     print('Asociasiones temrinadas')
                     break
                 else:
