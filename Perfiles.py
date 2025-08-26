@@ -1,5 +1,4 @@
 import getpass
-
 class Admin:
     def __init__(self, usuario, password):
         self.__usuario = usuario
@@ -16,7 +15,7 @@ class LoginAdmin:
         while intentos>0:
             try:
                 user = input('Ingrese su usuario: ')
-                password =  getpass.getpass('Ingrese su contraseña')
+                password =  getpass.getpass('Ingrese su contraseña: ')
                 if user == self.admin.get_usuario() and password == self.admin.get_password():
                     print('¡¡Inicio de sesión Exitoso!!')
                     return True
@@ -30,26 +29,30 @@ class LoginAdmin:
 class EntornoAdmin:
     print('clase para el admin')
 
-    def menu_admin(self):
+    def menu_admin(self, gestor_categorias, gestor_proveedores):
         fin_admin = True
+
         while fin_admin:
             try:
                 print('--- Bievenido Administrdor ---')
-                print('1.Ingresar Categorías 2.Ingresar Proveedor \n3. Realizar Compra \n4. Historial Compras')
-                print('5. Modificar producto \n6. Salir')
+                print('1.Ingresar Categorías \n2.Ingresar Proveedor \n3. Realizar Compra \n4. Mostrar Categorias\n5. Historial Compras')
+                print('6. Modificar producto \n7. Salir')
                 opcion = int(input('Seleccione la opción: '))
                 match opcion:
                     case 1:
-                        print('Ingreso categorias como unica tarea')
+                        gestor_categorias.agregar_categorias()
                     case 2:
                         print('Ingreso de proveedor modo manual')
+                        gestor_proveedores.agregar_proveedores(gestor_categorias)
                     case 3:
                         print('Compra ingresando id producto/categoria/proveedor(nuevo/existente)')
                     case 4:
-                        print('Historial de compras')
+                        gestor_categorias.mostrar_categorias()
                     case 5:
-                        print('Administrador puede cambiar/ pCompra/pVenta/Stock/proveedor')
+                        print('Historial de compras')
                     case 6:
+                        print('Administrador puede cambiar/ pCompra/pVenta/Stock/proveedor')
+                    case 7:
                         print('Saliendo del modo administrador')
                         fin_admin = False
                     case _:

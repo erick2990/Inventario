@@ -1,5 +1,6 @@
 import Perfiles
-from Perfiles import LoginAdmin
+import Categorias
+import Proveedores
 
 class Datos:
     def __init__(self, nombre_em, direccion):
@@ -30,7 +31,10 @@ def registrar_empresa():
 
 def menu_principal(empresa):
         fin_menu = True
-        administrador = Perfiles.LoginAdmin()
+        administrador = Perfiles.LoginAdmin() #contiene  el inicio de sesion
+        dinamica_admin = Perfiles.EntornoAdmin() #Contiene la dinamica para el menu admin
+        gestor_categorias = Categorias.GestionCategorias() #Contiene la dinamica para gestionar las categorias
+        gestor_proveedores =  Proveedores.GestionProveedores()
 
         while fin_menu:
             try:
@@ -42,10 +46,10 @@ def menu_principal(empresa):
                     case 1:
                         print('Administrador')
                         if administrador.inicio_sesion():
-                            print('submenu para control de las funciones del administrador')
-                            print('Aqui se enviaran todas las instancias que se manipularan')
+                            print('ACCEDIENDO COMO ADMINISTRADOR....\n')
+                            dinamica_admin.menu_admin(gestor_categorias, gestor_proveedores)
                         else:
-                            print('Por favor intente más tardes')
+                            print('Por favor intente más tarde')
                     case 2:
                         print('Cajero')
                     case 3:
