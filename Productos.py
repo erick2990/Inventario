@@ -6,7 +6,7 @@ class Producto:
         self.__id_proveedor = id_proveedor
         self.__precio_compra = precio_compra
         self.__precio_venta = precio_venta
-        self.__ganancia = precio_venta - precio_compra
+        self.__ganancia = (precio_venta - precio_compra) * stock
         self.__stock = stock
 
     def get_nombre_product(self):
