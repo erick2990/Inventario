@@ -54,8 +54,8 @@ class GestionProveedores:
             print('Asocie el proveedor con la categoria que provee: \n\n')
             gestor_categorias.mostrar_categorias() #muestra las categorias disponibles
             while True:
-                print('Presione 0 para finalizar la asociación')
-                cat_asociada = int(input('\nIngrese la categoria que desea asociar: '))
+                print('PRESIONE (0) PARA FINALIZAR LA ASOCIACIÓN')
+                cat_asociada = int(input('\nIngrese la categoria que desea asociar con el actual proveedor: '))
                 if cat_asociada in gestor_categorias.diccionario_cat.keys(): #se verifica si esta en las llaves
                    categroria_objeto = gestor_categorias.diccionario_cat[cat_asociada]
                    if proveedor_tmp in categroria_objeto.listado_proveedores:
@@ -66,9 +66,9 @@ class GestionProveedores:
                 if cat_asociada== 0:
                     print('Asociasiones temrinadas')
                     break
-                else:
-                    print('Esta categoria no existe por favor verifique')
+
             while True:
+                print('\n\n')
                 agregar = input('¿Desea ingresar otra Proveedor? S/N: ').upper()
                 if agregar == "S":
                     break

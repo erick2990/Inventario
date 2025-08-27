@@ -63,6 +63,7 @@ def menu_principal(empresa):
                 print('Error por favor verifique la entrada del menu principal')
 
 empresa_trabajar = registrar_empresa() #Toma los valores que se ingresan para esta empresa
+print('\n\n')
 menu_principal(empresa_trabajar) #Se mantiene mientras este en ejecucion
 
 

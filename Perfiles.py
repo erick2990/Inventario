@@ -35,14 +35,14 @@ class EntornoAdmin:
         while fin_admin:
             try:
                 print('--- Bievenido Administrdor ---')
-                print('1.Ingresar Categorías \n2.Ingresar Proveedor \n3. Realizar Compra \n4. Mostrar Categorias\n5. Historial Compras')
+                print('1. Ingresar Categorías \n2. Ingresar Proveedor \n3. Realizar Compra \n4. Mostrar Categorias\n5. Historial Compras')
                 print('6. Modificar producto \n7. Salir')
                 opcion = int(input('Seleccione la opción: '))
                 match opcion:
                     case 1:
                         gestor_categorias.agregar_categorias()
                     case 2:
-                        print('Ingreso de proveedor modo manual')
+                        print('\n')
                         gestor_proveedores.agregar_proveedores(gestor_categorias)
                     case 3:
                         print('Compra ingresando id producto/categoria/proveedor(nuevo/existente)')

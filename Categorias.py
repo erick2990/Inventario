@@ -15,7 +15,6 @@ class Categoria:
 
     def agregar_proveedor_categoria(self, objeto_proveedor):
         print(f'Proveedor {objeto_proveedor}')
-        print(f'Info proveedor desde el objeto')
         self.listado_proveedores.append(objeto_proveedor) #se guarda unicamente por ID ya que es la llave foranea
 
     def eliminar_proveedor(self, id_proveedor):
@@ -39,11 +38,15 @@ class GestionCategorias:
     def mostrar_categorias(self):
         for llave, campo in self.diccionario_cat.items():
             print(f'ID: {llave} Nombre: {campo.get_nombre_categoria()}')
+            print(f'proveedores: ')
+            for x in campo.get_listado_proveedores():
+                print(f'Empresa: {x.get_empresa_proveedor()} ID: {x.get_id_proveedor()} ')
+            print('\n')
 
     def agregar_categorias(self):
         fin_agregar = True
 
-        print('Ingrese todos los datos correspodientes: ')
+        print('Ingrese todos los datos correspodientes: \n\n')
 
         while fin_agregar:
             try:
@@ -57,9 +60,8 @@ class GestionCategorias:
 
                 else:
                     categoria_tmp = Categoria(id_categoria, nombre_categoria)
-                    self.diccionario_cat[
-                        id_categoria] = categoria_tmp  # se añade este objeto al diccionario y se guarda
-                    print('¡¡Categoria asociada con éxito!!')
+                    self.diccionario_cat[id_categoria] = categoria_tmp  # se añade este objeto al diccionario y se guarda
+                    print('¡¡Categoria asociada con éxito!!\n')
                     while True:
                         agregar = input('¿Desea ingresar otra categoria? S/N: ').upper()
                         if agregar == "S":
@@ -72,8 +74,6 @@ class GestionCategorias:
                         else:
                             print('Entrada no valida por favor intentarlo de nuevo')
 
-
-
             except Exception as e:
-                print('Error - Por favor verificar agregar categorias')
+                print(f'Error - Por favor verificar agregar categorias {e}')
 
