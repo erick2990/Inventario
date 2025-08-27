@@ -32,7 +32,7 @@ class GestionCategorias:
         self.diccionario_cat = {}
     def diccionario_categorias(self):
         return self.diccionario_cat
-    def diccionario_llaves_categorias(self): #retorna el diccionario
+    def diccionario_llaves_categorias(self): #retorna el diccionario como un entero
         return self.diccionario_cat.keys()
 
     def mostrar_categorias(self):

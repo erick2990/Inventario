@@ -1,5 +1,6 @@
 import Perfiles
 import Categorias
+import Productos
 import Proveedores
 
 class Datos:
@@ -35,6 +36,7 @@ def menu_principal(empresa):
         dinamica_admin = Perfiles.EntornoAdmin() #Contiene la dinamica para el menu admin
         gestor_categorias = Categorias.GestionCategorias() #Contiene la dinamica para gestionar las categorias
         gestor_proveedores =  Proveedores.GestionProveedores()
+        gestor_productos = Productos.GestionProductos()
 
         while fin_menu:
             try:
@@ -47,7 +49,7 @@ def menu_principal(empresa):
                         print('Administrador')
                         if administrador.inicio_sesion():
                             print('ACCEDIENDO COMO ADMINISTRADOR....\n')
-                            dinamica_admin.menu_admin(gestor_categorias, gestor_proveedores)
+                            dinamica_admin.menu_admin(gestor_categorias, gestor_proveedores, gestor_productos)
                         else:
                             print('Por favor intente más tarde')
                     case 2:

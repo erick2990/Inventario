@@ -29,7 +29,7 @@ class LoginAdmin:
 class EntornoAdmin:
     print('clase para el admin')
 
-    def menu_admin(self, gestor_categorias, gestor_proveedores):
+    def menu_admin(self, gestor_categorias, gestor_proveedores, gestor_productos):
         fin_admin = True
 
         while fin_admin:
@@ -45,8 +45,30 @@ class EntornoAdmin:
                         print('\n')
                         gestor_proveedores.agregar_proveedores(gestor_categorias)
                     case 3:
-                        print('Compra ingresando id producto/categoria/proveedor(nuevo/existente)')
+                        print('\n')
+                        if gestor_categorias.diccionario_cat and gestor_proveedores.diccionario_prov:
+                            while True:
+                                try:
+                                    print('1. Ingresar compra de productos NUEVOS \n2. Ingresar compra de productos EXISTENTES \n3. Salir')
+                                    opcion_s = int(input('Ingrese la opción a la que desee ingresar: '))
+                                    match opcion_s:
+                                        case 1:
+                                            print('\n')
+                                            gestor_productos.agregar_productos(gestor_categorias)
+                                        case 2:
+                                            print('\n')
+                                            gestor_productos.mostrar_productos()
+                                        case 3:
+                                            print('Regresando a menu admin')
+                                            break
+                                        case _:
+                                            print('Opción invalida - Ingrese un dato correcto')
+                                except Exception as e:
+                                    print(f'Error por favor verifique el submenu {e}')
+                        else:
+                            print('Datos vacios no se pueden realizar las compras')
                     case 4:
+                        print('\n')
                         gestor_categorias.mostrar_categorias()
                     case 5:
                         print('Historial de compras')
