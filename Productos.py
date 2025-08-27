@@ -36,6 +36,11 @@ class Producto:
             print('¡Cambio de precio de venta exitoso!')
         else:
             print('El precio de venta debe ser mayor para obtener ganancias')
+    def set_stock(self, nuevo_stock):
+        if nuevo_stock>0:
+            self.__stock = nuevo_stock
+        else:
+            print('El stock debe ser mayor a 0')
 
     def __str__(self):
         return (
@@ -66,6 +71,7 @@ class GestionProductos:
 
         global id_proveedor_categoria
         fin_agregar_p = True
+        productos_nuevos = {} #Este diccionario sirve para enviar a las compras
         print('\t\tAñadir productos nuevos al inventario\n\n')
         while fin_agregar_p:
             print('\t\tINGRESE LOS DATOS CORRESPONDIENTES DEL PRODUCTO:')
@@ -132,6 +138,7 @@ class GestionProductos:
             #Se instancia el objeto
             producto_tmp = Producto(nombre_producto, id_producto, id_categoria_producto, id_proveedor_categoria, precio_compra, precio_venta, stock)
             self.diccionario_productos[id_producto] = producto_tmp #se guarda el producto en el diccionario general
+            productos_nuevos[id_producto] = producto_tmp #Se guarda en el diccionario de retorno
             while True:
                 print('\n\n')
                 agregar = input('¿Desea ingresar otro Producto? S/N: ').upper()
@@ -140,9 +147,48 @@ class GestionProductos:
                 elif agregar == "N":
                     print('Registros Guardados')
                     fin_agregar_p= False
-                    break
+                    return productos_nuevos
                 else:
                     print('Entrada no valida por favor intentarlo de nuevo')
 
-    def Abastecer(self):
-        print('Metodo para aumentar stock de productos ya existentes')
+    def abastecer(self):
+        print('\nAbastecimiento de productos existentes\n')
+
+        if not self.diccionario_productos:
+            print('No hay productos registrados para abastecer.')
+            return
+
+        self.mostrar_productos()
+
+        while True:
+            try:
+                id_producto = int(input('\nIngrese el ID del producto que desea abastecer: '))
+                if id_producto in self.diccionario_productos:
+                    producto = self.diccionario_productos[id_producto]
+                    print(
+                        f'Producto seleccionado: {producto.get_nombre_product()} | Stock actual: {producto.get_stock()} unidades')
+
+                    while True:
+                        try:
+                            cantidad = int(input('Ingrese la cantidad que se sumara al stock: '))
+                            if cantidad > 0:
+                                nuevo_stock = producto.get_stock() + cantidad
+                                producto.set_stock(nuevo_stock)
+                                print(f'Stock actualizado. Nuevo stock: {nuevo_stock} unidades.')
+                                break
+                            else:
+                                print('La cantidad debe ser mayor a 0.')
+                        except Exception as e:
+                            print(f'Error al ingresar cantidad. Detalle: {e}')
+                else:
+                    print('El ID ingresado no corresponde a ningún producto.')
+            except Exception as e:
+                print(f' Error al ingresar el ID. Detalle: {e}')
+
+            continuar = input('\n¿Desea abastecer otro producto? S/N: ').upper()
+            if continuar == 'N':
+                print('Abastecimiento finalizado.')
+                break
+            elif continuar != 'S':
+                print('Entrada no válida. Se asumirá que no desea continuar.')
+                break

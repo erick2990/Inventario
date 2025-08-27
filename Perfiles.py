@@ -54,7 +54,7 @@ class EntornoAdmin:
                                     match opcion_s:
                                         case 1:
                                             print('\n')
-                                            gestor_productos.agregar_productos(gestor_categorias)
+
                                         case 2:
                                             print('\n')
                                             gestor_productos.mostrar_productos()
