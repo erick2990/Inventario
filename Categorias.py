@@ -37,10 +37,10 @@ class GestionCategorias:
 
     def mostrar_categorias(self):
         for llave, campo in self.diccionario_cat.items():
-            print(f'ID: {llave} Nombre: {campo.get_nombre_categoria()}')
-            print(f'proveedores: ')
+            print(f'ID CATEGORIA: {llave} NOMBRE CATEGORIA: {campo.get_nombre_categoria()}')
+            print(f'LISTADO PROVEEDORES: ')
             for x in campo.get_listado_proveedores():
-                print(f'Empresa: {x.get_empresa_proveedor()} ID: {x.get_id_proveedor()} ')
+                print(f'Empresa: {x.get_empresa_proveedor()} ID_PROVEEDOR: {x.get_id_proveedor()} ')
             print('\n')
 
     def agregar_categorias(self):
