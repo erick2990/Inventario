@@ -156,9 +156,10 @@ class GestionProductos:
 
         if not self.diccionario_productos:
             print('No hay productos registrados para abastecer.')
-            return
+            return {}
 
         self.mostrar_productos()
+        productos_abastecidos = {}
 
         while True:
             try:
@@ -175,6 +176,8 @@ class GestionProductos:
                                 nuevo_stock = producto.get_stock() + cantidad
                                 producto.set_stock(nuevo_stock)
                                 print(f'Stock actualizado. Nuevo stock: {nuevo_stock} unidades.')
+                                # Guardar en el diccionario de productos abastecidos
+                                productos_abastecidos[id_producto] = producto
                                 break
                             else:
                                 print('La cantidad debe ser mayor a 0.')
@@ -192,3 +195,4 @@ class GestionProductos:
             elif continuar != 'S':
                 print('Entrada no válida. Se asumirá que no desea continuar.')
                 break
+            return productos_abastecidos #Aqui retorna el diccionario de productos que se abastecieron en esta sesion

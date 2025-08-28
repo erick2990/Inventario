@@ -33,3 +33,14 @@ class GestionCompras:
         compra_tmp = Compra(id_compra, fecha_actual)
         compra_tmp.diccionario_articulos_comprados = productos_comprados #aqui se guardan solo los productos comprados
         self.diccionario_historial_compras[id_compra] = compra_tmp #Se guarda la compra en el diccionario de compras
+
+    def realizar_abastecimiento(self, gestor_productos):
+        print('Aqui la dinamica de la compra')
+        id_compra = len(list(self.diccionario_historial_compras)) + 30  # Aqui le asigna de forma atumatica el ID
+        fecha_actual = datetime.now().date()  # guarda la fecha
+        productos_abastecidos = gestor_productos.abastecer() #Diccionario de articulos abastecidos
+
+        # Se crea el objeto y para guardar los productos ingresados
+        compra_tmp = Compra(id_compra, fecha_actual)
+        compra_tmp.diccionario_articulos_comprados = productos_abastecidos  # aqui se guardan solo los productos abastecidos
+        self.diccionario_historial_compras[id_compra] = compra_tmp  # Se guarda la compra en el diccionario de compras

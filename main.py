@@ -1,3 +1,4 @@
+import Compras
 import Perfiles
 import Categorias
 import Productos
@@ -37,6 +38,7 @@ def menu_principal(empresa):
         gestor_categorias = Categorias.GestionCategorias() #Contiene la dinamica para gestionar las categorias
         gestor_proveedores =  Proveedores.GestionProveedores()
         gestor_productos = Productos.GestionProductos()
+        gestor_compras = Compras.GestionCompras()
 
         while fin_menu:
             try:
@@ -49,7 +51,7 @@ def menu_principal(empresa):
                         print('Administrador')
                         if administrador.inicio_sesion():
                             print('ACCEDIENDO COMO ADMINISTRADOR....\n')
-                            dinamica_admin.menu_admin(gestor_categorias, gestor_proveedores, gestor_productos)
+                            dinamica_admin.menu_admin(gestor_categorias, gestor_proveedores, gestor_productos, gestor_compras)
                         else:
                             print('Por favor intente más tarde')
                     case 2:
