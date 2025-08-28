@@ -1,4 +1,6 @@
 import getpass
+#archivo perfiles
+
 class Admin:
     def __init__(self, usuario, password):
         self.__usuario = usuario
@@ -29,7 +31,7 @@ class LoginAdmin:
 class EntornoAdmin:
     print('clase para el admin')
 
-    def menu_admin(self, gestor_categorias, gestor_proveedores, gestor_productos, gestor_compras):
+    def menu_admin(self, gestor_categorias, gestor_proveedores, gestor_productos, gestor_compras, gestor_empleados):
         fin_admin = True
 
         while fin_admin:
@@ -49,7 +51,8 @@ class EntornoAdmin:
                         if gestor_categorias.diccionario_cat and gestor_proveedores.diccionario_prov:
                             while True:
                                 try:
-                                    print('1. Ingresar compra de productos NUEVOS \n2. Ingresar compra de productos EXISTENTES\n3. Mostrar compras \n4. Salir')
+                                    print('1. Ingresar compra de productos NUEVOS \n2. Ingresar compra de productos EXISTENTES\n3. Mostrar compras')
+                                    print('\n4. Contratar Trabajadores  \n5. Salir')
                                     opcion_s = int(input('Ingrese la opción a la que desee ingresar: '))
                                     match opcion_s:
                                         case 1:
@@ -64,6 +67,9 @@ class EntornoAdmin:
                                             print('\nHistorial de compras: ')
                                             gestor_compras.mostrar_compras()
                                         case 4:
+                                            print('Contrato de personal: ')
+                                            #gestor_empleados. pendiente el metodo de agregar de modo manual los empleados
+                                        case 5:
                                             print('Regresando a menu admin')
                                             break
                                         case _:

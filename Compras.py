@@ -1,3 +1,4 @@
+#arcivo compras
 from datetime import  datetime
 
 class Compra:

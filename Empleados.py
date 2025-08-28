@@ -1,75 +1,62 @@
-class Clientes:
-    def __init__(self):
-        self.clientes = {}
-        self.cargar_clientes()
+#Archivo empleados
+class Empleados:
+    def __init__(self, id_empleado, nombre, telefono, direccion, correo):
+        self.__id_empleado = id_empleado
+        self.__nombre = nombre
+        self.__telefono = telefono
+        self.direccion = direccion
+        self.correo = correo
+        self.ventas = {} #Este empleado tendra un record de ventas que ha realizado
 
-    def cargar_clientes(self):
-        try:
-            with open("Empleados.txt", "r", encoding="utf-8") as archivo:
-                for linea in archivo:
-                    linea = linea.strip()
-                    if linea :
-                        id_empleado, nombre, telefono, direccion, correo = linea.split(":")
-                        self.clientes[id_empleado] = {
-                            "Nombre": nombre,
-                            "Direccion": direccion,
-                            "Telefono": telefono,
-                            "Correo": correo
-                        }
-            print("Empleados importados desde Empleados.txt")
-        except FileNotFoundError:
-            print("No existe el archivo Empleados.txt, se creará uno nuevo al guardar.")
+    def get_id_empleado(self):
+        return self.__id_empleado
+    def get_nombre_empleado(self):
+        return self.__nombre
 
-    def guardar_clientes(self):
-        with open("Empleados.txt", "w", encoding="utf-8") as archivo:
-            for id_trabajador, datos in self.clientes.items():
-                archivo.write(f"{id_trabajador}:{datos['Nombre']}:{datos['Direccion']}:{datos['Telefono']}:{datos['Correo']}\n")
-
-    def agregar_cliente(self, nit, nombre, direccion, telefono, correo):
-        self.clientes[nit] = {
-            "Nombre": nombre,
-            "Direccion": direccion,
-            "Telefono": telefono,
-            "Correo": correo
-        }
-        self.guardar_clientes()
-        print(f"Cliente con NIT {nit} agregado y guardado correctamente.")
-
-    def mostrar_todos(self):
-        if self.clientes:
-            print("\nLista de clientes:")
-            for id_empleado, datos in self.clientes.items():
-                print(f"\nNIT: {id_empleado}")
-                for clave, valor in datos.items():
-                    print(f"{clave}: {valor}")
+    def __str__(self):
+        resumen = (
+            f"Empleado: {self.__nombre} | ID: {self.__id_empleado}\n"
+            f"Teléfono: {self.__telefono} | Dirección: {self.direccion} | Correo: {self.correo}\n"
+        )
+        if self.ventas:
+            resumen += f"Ventas realizadas: {len(self.ventas)}\n"
+            for id_venta, venta in self.ventas.items():
+                resumen += f"  - Venta ID: {id_venta} | Detalles: {venta}\n"
         else:
-            print("No hay clientes registrados.")
+            resumen += "No ha realizado ventas aún.\n"
+        return resumen
+
+class GestionEmpleados:
+
+    def __init__(self):
+        self.diccionario_empleados = {}
 
 
-clientes = Clientes()
+    def agregar_empleado(self):
+        print('Ingrese los datos adecuados para el nuevo trabajador: ')
+        id_empleado = len(list(self.diccionario_empleados)) + 2
+        nombre = input('Ingrese el nombre: ')
+        print(f'El ID: {id_empleado}  se asignara al trabajador: {nombre}')
+        telefono = input('Ingrese el numero de telefono: ')
+        direccion = input('Ingrese la direccion: ')
+        correo = input('Ingrese el correo electronico: ')
 
-while True:
-    print("\n--- Menú ---")
-    print("1. Agregar cliente")
-    print("2. Mostrar todos los clientes")
-    print("3. Salir")
+        empleado_tmp = Empleados(id_empleado, nombre, telefono, direccion, correo)
+        self.diccionario_empleados[id_empleado] = empleado_tmp #se guarda el empleado introducido en el diccionario de empelados
+        print('¡¡Empleado guardado de forma exitosa!!')
 
-    opcion = input("Elige una opción: ")
+    def acreditar_venta(self, id_empleado, objeto_venta):
+        if id_empleado in self.diccionario_empleados:
+            id_venta = objeto_venta.get_id_venta()  # Getter de la venta asociada para asociar el objeto con ese mismo ID
+            self.diccionario_empleados[id_empleado].ventas[id_venta] = objeto_venta
+            print(f" Venta acreditada al empleado {id_empleado}")
+        else:
+            print("Empleado no encontrado.")
 
-    if opcion == "1":
-        nit = input("NIT: ")
-        nombre = input("Nombre: ")
-        direccion = input("Dirección: ")
-        telefono = input("Teléfono: ")
-        correo = input("Correo: ")
-        clientes.agregar_cliente(nit, nombre, direccion, telefono, correo)
 
-    elif opcion == "2":
-        clientes.mostrar_todos()
+    def existencia_valida(self, id_vendedor):
+        #Metodo que retorna True si el id es correcto para la asociacion de la venta
+        return id_vendedor in self.diccionario_empleados
 
-    elif opcion == "3":
-        print("Saliendo del programa...")
-        break
 
-    else:
-        print("Opción inválida, intenta de nuevo.")
+

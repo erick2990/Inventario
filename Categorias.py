@@ -1,3 +1,4 @@
+#archivo categorias
 class Categoria:
 
     def __init__(self,id_categoria ,nombre_categoria):

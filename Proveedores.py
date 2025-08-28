@@ -1,3 +1,4 @@
+#Archivo proveedores
 class Proveedor:
 
     def __init__(self, id_proveedor, nombre_empresa, cel_proveedor, dir_proveedor, correo_proveedor):

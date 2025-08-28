@@ -1,3 +1,4 @@
+#Archivo productos
 class Producto:
     def __init__(self, nombre, id_producto, id_categoria, id_proveedor, precio_compra, precio_venta, stock):
         self.__nombre =  nombre

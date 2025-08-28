@@ -3,7 +3,9 @@ import Perfiles
 import Categorias
 import Productos
 import Proveedores
+import Empleados
 
+#archivo main
 class Datos:
     def __init__(self, nombre_em, direccion):
         self.__empresa = nombre_em
@@ -39,6 +41,7 @@ def menu_principal(empresa):
         gestor_proveedores =  Proveedores.GestionProveedores()
         gestor_productos = Productos.GestionProductos()
         gestor_compras = Compras.GestionCompras()
+        gestor_empleados = Empleados.GestionEmpleados()
 
         while fin_menu:
             try:
@@ -51,7 +54,7 @@ def menu_principal(empresa):
                         print('Administrador')
                         if administrador.inicio_sesion():
                             print('ACCEDIENDO COMO ADMINISTRADOR....\n')
-                            dinamica_admin.menu_admin(gestor_categorias, gestor_proveedores, gestor_productos, gestor_compras)
+                            dinamica_admin.menu_admin(gestor_categorias, gestor_proveedores, gestor_productos, gestor_compras, gestor_empleados)
                         else:
                             print('Por favor intente más tarde')
                     case 2:

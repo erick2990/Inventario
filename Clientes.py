@@ -1,75 +1,57 @@
-class Cliente:
-    def __init__(self):
-        self.clientes = {}
-        self.cargar_clientes()
+#archivo clientes
+class Clientes:
+    def __init__(self, nit,nombre, telefono):
+        self.__nit = nit
+        self.__nombre = nombre
+        self.__telefonos = telefono
+        self.compras = {}  # Compras que ha realizado el cliente
 
-    def cargar_clientes(self):
-        try:
-            with open("clientes.txt", "r", encoding="utf-8") as archivo:
-                for linea in archivo:
-                    linea = linea.strip()
-                    if linea :
-                        nit, nombre, direccion, telefono, correo = linea.split(":")
-                        self.clientes[nit] = {
-                            "Nombre": nombre,
-                            "Direccion": direccion,
-                            "Telefono": telefono,
-                            "Correo": correo
-                        }
-            print("Clientes importados desde clientes.txt")
-        except FileNotFoundError:
-            print("No existe el archivo clientes.txt, se creará uno nuevo al guardar.")
+    def get_nit(self):
+        return self.__nit
+    def get_nombre(self):
+        return self.__nombre
 
-    def guardar_clientes(self):
-        with open("clientes.txt", "w", encoding="utf-8") as archivo:
-            for nit, datos in self.clientes.items():
-                archivo.write(f"{nit}:{datos['Nombre']}:{datos['Direccion']}:{datos['Telefono']}:{datos['Correo']}\n")
-
-    def agregar_cliente(self, nit, nombre, direccion, telefono, correo):
-        self.clientes[nit] = {
-            "Nombre": nombre,
-            "Direccion": direccion,
-            "Telefono": telefono,
-            "Correo": correo
-        }
-        self.guardar_clientes()
-        print(f"Cliente con NIT {nit} agregado y guardado correctamente.")
-
-    def mostrar_todos(self):
-        if self.clientes:
-            print("\nLista de clientes:")
-            for nit, datos in self.clientes.items():
-                print(f"\nNIT: {nit}")
-                for clave, valor in datos.items():
-                    print(f"{clave}: {valor}")
+    def __str__(self):
+        resumen = (
+            f"Cliente: {self.__nombre} | NIT: {self.__nit}\n"
+            f"Teléfono: {self.__telefonos}\n"
+        )
+        if self.compras:
+            resumen += f"Compras realizadas: {len(self.compras)}\n"
+            for id_compra, compra in self.compras.items():
+                resumen += f"  - Compra ID: {id_compra} | Detalles: {compra}\n"
         else:
-            print("No hay clientes registrados.")
+            resumen += "No ha realizado compras aún.\n"
+        return resumen
+
+class GestionClientes:
+
+    def __init__(self):
+        self.diccionario_clientes = {}
+
+    def agregar_cliente(self):
+        print("\n Registro de nuevo cliente")
+        nit = input("Ingrese el NIT del cliente: ")
+        if nit in self.diccionario_clientes:
+            print("⚠Este NIT ya está registrado.")
+            return
+
+        nombre = input("Ingrese el nombre del cliente: ")
+        telefono = input("Ingrese el número de teléfono: ")
+
+        cliente_tmp = Clientes(nit, nombre, telefono)
+        self.diccionario_clientes[nit] = cliente_tmp
+        print("Cliente agregado exitosamente.")
+
+    def asociar_compra_cliente(self, nit, objeto_comprado):
+        if nit in self.diccionario_clientes:
+            id_venta = objeto_comprado.get_id_venta()  # o usa un getter si lo tienes
+            self.diccionario_clientes[nit].compras[id_venta] = objeto_comprado
+            print(f"Compra asociada al cliente {nit}")
+        else:
+            print("Cliente no encontrado. No se puede asociar la compra.")
+
+    def cliente_existe(self, nit):
+        return nit in self.diccionario_clientes
 
 
-clientes = Clientes()
-
-while True:
-    print("\n--- Menú ---")
-    print("1. Agregar cliente")
-    print("2. Mostrar todos los clientes")
-    print("3. Salir")
-
-    opcion = input("Elige una opción: ")
-
-    if opcion == "1":
-        nit = input("NIT: ")
-        nombre = input("Nombre: ")
-        direccion = input("Dirección: ")
-        telefono = input("Teléfono: ")
-        correo = input("Correo: ")
-        clientes.agregar_cliente(nit, nombre, direccion, telefono, correo)
-
-    elif opcion == "2":
-        clientes.mostrar_todos()
-
-    elif opcion == "3":
-        print("Saliendo del programa...")
-        break
-
-    else:
-        print("Opción inválida, intenta de nuevo.")
