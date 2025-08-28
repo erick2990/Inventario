@@ -197,3 +197,6 @@ class GestionProductos:
                 print('Entrada no válida. Se asumirá que no desea continuar.')
                 break
             return productos_abastecidos #Aqui retorna el diccionario de productos que se abastecieron en esta sesion
+
+    def producto_existe(self, id_producto):
+        return id_producto in self.diccionario_productos
