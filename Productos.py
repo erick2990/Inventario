@@ -82,7 +82,7 @@ class GestionProductos:
                                         float(p_venta), int(stock))
                     self.diccionario_productos[int(id_prod)] = producto
         except FileNotFoundError:
-            print("📁 productos.txt no encontrado. Se creará al guardar.")
+            print("productos.txt no encontrado. Se creará al guardar.")
 
     #metodo para añadir productos nuevos o empezar de 0
     #el gesto de categorias es el vinculo para unir los ID de la categoria y los ID de los proveedores
