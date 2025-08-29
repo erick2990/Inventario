@@ -24,7 +24,6 @@ class Producto:
         return self.__precio_compra
     def get_stock(self):
         return self.__stock
-
     def set_precio_compra(self, nuevo_precio_compra):
         if nuevo_precio_compra>0:
             self.__precio_compra = nuevo_precio_compra
@@ -38,10 +37,7 @@ class Producto:
         else:
             print('El precio de venta debe ser mayor para obtener ganancias')
     def set_stock(self, nuevo_stock):
-        if nuevo_stock>0:
-            self.__stock = nuevo_stock
-        else:
-            print('El stock debe ser mayor a 0')
+        self.__stock = nuevo_stock
 
     def __str__(self):
         return (
@@ -56,6 +52,10 @@ class GestionProductos:
 
     def __init__(self):
         self.diccionario_productos = {}
+        self.cargar_productos()
+
+    def producto_existe(self, id_producto):
+        return id_producto in self.diccionario_productos
 
     def mostrar_productos(self):
         if not self.diccionario_productos:
@@ -65,6 +65,24 @@ class GestionProductos:
             print(f'ID Producto: {llave}')
             print(f'{campo}')
 
+    def guardar_productos(self, archivo="productos.txt"):
+        with open(archivo, "w", encoding="utf-8") as f:
+            for prod in self.diccionario_productos.values():
+                f.write(
+                    f"{prod.get_id_producto()}:{prod.get_nombre_product()}:{prod.get_id_categoria()}:"
+                    f"{prod.get_id_proveedor()}:{prod.get_precio_compra():.2f}:{prod.get_precio_venta():.2f}:{prod.get_stock()}\n"
+                )
+
+    def cargar_productos(self, archivo="productos.txt"):
+        try:
+            with open(archivo, "r", encoding="utf-8") as f:
+                for linea in f:
+                    id_prod, nombre, id_cat, id_prov, p_compra, p_venta, stock = linea.strip().split(":")
+                    producto = Producto(nombre, int(id_prod), int(id_cat), int(id_prov), float(p_compra),
+                                        float(p_venta), int(stock))
+                    self.diccionario_productos[int(id_prod)] = producto
+        except FileNotFoundError:
+            print("📁 productos.txt no encontrado. Se creará al guardar.")
 
     #metodo para añadir productos nuevos o empezar de 0
     #el gesto de categorias es el vinculo para unir los ID de la categoria y los ID de los proveedores
@@ -198,5 +216,4 @@ class GestionProductos:
                 break
             return productos_abastecidos #Aqui retorna el diccionario de productos que se abastecieron en esta sesion
 
-    def producto_existe(self, id_producto):
-        return id_producto in self.diccionario_productos
+
