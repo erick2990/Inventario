@@ -31,10 +31,29 @@ class GestionCategorias:
 
     def __init__(self):
         self.diccionario_cat = {}
-    def diccionario_categorias(self):
-        return self.diccionario_cat
-    def diccionario_llaves_categorias(self): #retorna el diccionario como un entero
-        return self.diccionario_cat.keys()
+
+
+    def guardar_categorias(self, archivo="categorias.txt"):
+        with open(archivo, "w", encoding="utf-8") as f:
+            for id_cat, cat in self.diccionario_cat.items():
+                proveedores_ids = [str(p.get_id_proveedor()) for p in cat.get_listado_proveedores()]
+                f.write(f"{id_cat}:{cat.get_nombre_categoria()}:{','.join(proveedores_ids)}\n")
+
+    def cargar_categorias(self, gestor_proveedores, archivo="categorias.txt"): #este metodo de cargar es distinto porque se inica desde proveedores porque puede provenir desde alli
+        try:
+            with open(archivo, "r", encoding="utf-8") as f:
+                for linea in f:
+                    id_cat, nombre, proveedores_str = linea.strip().split(":")
+                    categoria = Categoria(int(id_cat), nombre)
+                    if proveedores_str:
+                        for pid in proveedores_str.split(","):
+                            pid_int = int(pid)
+                            if pid_int in gestor_proveedores.diccionario_prov:
+                                proveedor_obj = gestor_proveedores.diccionario_prov[pid_int]
+                                categoria.agregar_proveedor_categoria(proveedor_obj)
+                    self.diccionario_cat[int(id_cat)] = categoria
+        except FileNotFoundError:
+            print("categorias.txt no encontrado. Se creará al guardar.")
 
     def mostrar_categorias(self):
         for llave, campo in self.diccionario_cat.items():
