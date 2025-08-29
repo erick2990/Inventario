@@ -11,22 +11,33 @@ class Admin:
         return self.__password
 
 class LoginAdmin:
-    admin = Admin('Erick', 'Erick2000') #Aqui se instancia un objeto de tipo admin para que pueda iniciarse sesion
+    def __init__(self):
+        self.admin = Admin("Erick", "Erick2000")
+        self.cargar_admin()
+
+    def cargar_admin(self, archivo="admin.txt"):
+        try:
+            with open(archivo, "r", encoding="utf-8") as f:
+                linea = f.readline().strip()
+                usuario, password = linea.split(":")
+                self.admin = Admin(usuario, password)
+        except FileNotFoundError:
+            print("admin.txt no encontrado. Se usará el usuario por defecto.")
+
     def inicio_sesion(self):
         intentos = 3
-        while intentos>0:
-            try:
-                user = input('Ingrese su usuario: ')
-                password =  getpass.getpass('Ingrese su contraseña: ')
-                if user == self.admin.get_usuario() and password == self.admin.get_password():
-                    print('¡¡Inicio de sesión Exitoso!!')
-                    return True
-                else:
-                    intentos -=1
-                    print(f'Le quedan {intentos}')
-            except Exception as e:
-                print('Error por favor verifique la entrada')
-        print('Se terminaron los intentos validos')
+        while intentos > 0:
+            user = input("Usuario: ")
+            password = getpass.getpass("Contraseña: ")
+            if user == self.admin.get_usuario() and password == self.admin.get_password():
+                print("Inicio de sesión exitoso.")
+                return True
+            else:
+                intentos -= 1
+                print(f"Credenciales incorrectas. Intentos restantes: {intentos}")
+        print(" Se agotaron los intentos.")
+        return False
+
 
 class EntornoAdmin:
 

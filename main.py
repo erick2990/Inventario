@@ -66,9 +66,18 @@ def menu_principal(empresa):
                         gestor_ventas.realizar_venta(gestor_clientes, gestor_empleados, gestor_productos)
                     case 3:
                         print('Visitante')
+                        print('Funcion en construccion')
 
                     case 4:
                         print('Gracias por usar el sistema')
+                        #guardamos todos los datos
+                        gestor_clientes.guardar_clientes()
+                        gestor_empleados.guardar_empleados()
+                        gestor_productos.guardar_productos()
+                        gestor_proveedores.guardar_proveedores()
+                        gestor_categorias.guardar_categorias()
+                        gestor_compras.guardar_compras()
+                        gestor_ventas.guardar_ventas()
                         fin_menu = False
                     case _:
                         print('Error por favor ingrese una entrada valida')
