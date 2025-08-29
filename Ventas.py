@@ -95,6 +95,7 @@ class GestionVentas:
                     break
                 else:
                     print('Por favor verifique su PIN')
+                    return
 
             except  Exception as e:
                 print(f'Ocurrió un error en ventas por favor verificar {e}')

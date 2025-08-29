@@ -1,0 +1,2 @@
+20:Tornillos polser:2:3:4.00:10.00:31
+21:Martillo de golpe:5:4:50.00:75.00:30

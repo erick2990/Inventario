@@ -20,7 +20,7 @@ class Clientes:
         if self.compras:
             resumen += f"Compras realizadas: {len(self.compras)}\n"
             for id_compra, compra in self.compras.items():
-                resumen += f"  - Compra ID: {id_compra} | Detalles: {compra}\n"
+                resumen += f"| Detalles: \n{compra}\n"
         else:
             resumen += "No ha realizado compras aún.\n"
         return resumen
@@ -30,6 +30,13 @@ class GestionClientes:
     def __init__(self):
         self.diccionario_clientes = {}
         self.cargar_clientes()
+
+    def mostrar_clientes(self):
+        if not self.diccionario_clientes:
+            print('Listado de clientes vació')
+        else:
+            for id, cliente in self.diccionario_clientes.items():
+                print(f'{cliente}')
 
     def cliente_existe(self, nit):
         return nit in self.diccionario_clientes

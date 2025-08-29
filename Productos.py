@@ -219,26 +219,37 @@ class GestionProductos:
             return productos_abastecidos #Aqui retorna el diccionario de productos que se abastecieron en esta sesion
 
     def modificar_precio_venta_compra(self):
-        id_modificar = input('Ingrese el ID del producto a modificar: ')
+        try:
+            id_modificar = int(input('Ingrese el ID del producto a modificar: '))
 
-        if id_modificar in self.diccionario_productos:
-            producto_mod = self.diccionario_productos[id_modificar]
-            while True:
-                print('1. Modificar precio venta \n2. Modificar precio compra 3. CANCELAR')
-                opcion = int(input('Ingrese la opción: '))
-                match opcion:
-                    case 1:
-                        producto_mod.set_precio_venta()
-                    case 2:
-                        producto_mod.set_precio_compra()
-                    case 3:
-                        print('Regresando')
-                        print('---' * 40)
-                        break
-                    case _:
-                        print('ERROR - Esta opción no existe')
-        else:
-            print('Producto no existe')
+            if id_modificar in self.diccionario_productos.keys():
+                producto_mod = self.diccionario_productos[id_modificar]
+                while True:
+                    print('1. Modificar precio venta \n2. Modificar precio compra \n3. CANCELAR')
+                    opcion = int(input('Ingrese la opción: '))
+                    match opcion:
+                        case 1:
+                            try:
+                                nuevo_precio_v = int(input('Ingrese el nuevo precio de venta: '))
+                                producto_mod.set_precio_venta(nuevo_precio_v)
+                            except Exception as e:
+                                print('Error por favor ingrese un dato válido')
+                        case 2:
+                            try:
+                                nuevo_precio_c = int(input('Ingrese el nuevo precio de venta: '))
+                                producto_mod.set_precio_compra(nuevo_precio_c)
+                            except Exception as e:
+                                print('Error por favor ingrese un dato válido')
+                        case 3:
+                            print('Regresando')
+                            print('---' * 40)
+                            break
+                        case _:
+                            print('ERROR - Esta opción no existe')
+            else:
+                print('Producto no existe')
+        except Exception as e:
+            print('Ocurrió un error por favor verificar')
 
 
 

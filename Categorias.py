@@ -75,13 +75,9 @@ class GestionCategorias:
         while fin_agregar:
             try:
                 print('\n')
-                print('\t\t\tINRGRESE 0 PARA CANCELAR EL PROCESO')
                 id_categoria = len(list(self.diccionario_cat)) +1 #El ID que tomara es por defecto y empieza en 1
                 print(f'ID de categoria automático: {id_categoria}')
                 nombre_categoria = input('Ingrese el nombre de la categoria: ').upper()
-                if int(nombre_categoria) == 0:
-                    print('Regresando...')
-                    break
                 existencia_nombres = [cat.get_nombre_categoria().upper() for cat in self.diccionario_cat.values()] #lista por comprension
                 if nombre_categoria in existencia_nombres:
                     print('Este nombre ya existe por favor vuelva a intentarlo') #Esto valida que le nombre no se repita

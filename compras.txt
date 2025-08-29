@@ -1,0 +1,2 @@
+30|2025-09-01|20,Tornillos polser,10.00,10
+31|2025-09-01|21,Martillo de golpe,75.00,30

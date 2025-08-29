@@ -55,8 +55,7 @@ class EntornoAdmin:
                         print('\n')
                         while True:
                             try:
-                                print(
-                                    '1. Ingresar compra de productos NUEVOS \n2. Ingresar compra de productos EXISTENTES')
+                                print('1. Ingresar compra de productos NUEVOS \n2. Ingresar compra de productos EXISTENTES')
                                 print('3. Salir')
                                 opcion_s = int(input('Ingrese la opción a la que desee ingresar: '))
                                 match opcion_s:
@@ -94,10 +93,7 @@ class EntornoAdmin:
                         gestor_productos.mostrar_productos()
                     case 9:
                         print('Modificar precios:')
-                        if not gestor_productos.diccionario_productos:
-                            print('No hay productos aún')
-                        else:
-                            gestor_productos.modificar_precio_venta_compra()
+                        gestor_productos.modificar_precio_venta_compra()
 
                     case 10:
                         print('Saliendo del modo administrador')
@@ -119,5 +115,7 @@ class Invitado:
 
     def mostrar_categorias_invitado(self, gestor_categorias):
         gestor_categorias.mostrar_categorias()
+    def mostrar_clientes_invitado(self, gestor_clientes):
+        gestor_clientes.mostrar_clientes()
 
 
