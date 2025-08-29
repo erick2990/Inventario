@@ -3,7 +3,7 @@ class Empleados:
     def __init__(self, id_empleado, nombre, telefono, direccion, correo):
         self.__id_empleado = id_empleado
         self.__nombre = nombre
-        self.__telefono = telefono
+        self.telefono = telefono
         self.direccion = direccion
         self.correo = correo
         self.ventas = {} #Este empleado tendra un record de ventas que ha realizado
@@ -13,10 +13,11 @@ class Empleados:
     def get_nombre_empleado(self):
         return self.__nombre
 
+
     def __str__(self):
         resumen = (
-            f"Empleado: {self.__nombre} | ID: {self.__id_empleado}\n"
-            f"Teléfono: {self.__telefono} | Dirección: {self.direccion} | Correo: {self.correo}\n"
+            f"Empleado: {self.get_nombre_empleado()} | ID: {self.get_id_empleado()}\n"
+            f"Teléfono: {self.telefono} | Dirección: {self.direccion} | Correo: {self.correo}\n"
         )
         if self.ventas:
             resumen += f"Ventas realizadas: {len(self.ventas)}\n"
@@ -34,13 +35,13 @@ class GestionEmpleados:
 
 
     def agregar_empleado(self):
-        print('Ingrese los datos adecuados para el nuevo trabajador: ')
+        print('\t\tIngrese los datos adecuados para el nuevo trabajador: ')
         id_empleado = len(list(self.diccionario_empleados)) + 2
         nombre = input('Nombre: ')
         print(f'El ID: {id_empleado}  se asignara al trabajador: {nombre}')
         telefono = input('Teléfono: ')
         direccion = input('Dirección: ')
-        correo = input('Correo electronico: ')
+        correo = input('Correo electrónico: ')
         empleado_tmp = Empleados(id_empleado, nombre, telefono, direccion, correo)
         self.diccionario_empleados[id_empleado] = empleado_tmp #se guarda el empleado introducido en el diccionario de empelados
         self.guardar_empleados()

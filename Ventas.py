@@ -74,7 +74,7 @@ class GestionVentas:
     def mostrar_ventas(self):
         print("\nHistorial de ventas registradas:\n")
         if not self.diccionario_ventas_generales:
-            print("No hay ventas registradas aún.")
+            print("No hay ventas registradas aún.\n")
             return
 
         for id_venta, venta in self.diccionario_ventas_generales.items():
@@ -84,9 +84,9 @@ class GestionVentas:
 
     def realizar_venta(self, gestor_clientes, gestor_empleados, gestor_productos):
         print('Logica de venta')
-        id_venta = len(list(self.diccionario_ventas_generales)) + 5 #Id de las ventas de forma automatica
+        id_venta = len(list(self.diccionario_ventas_generales)) + 5 #Id de las ventas de forma automática
         fecha_actual = datetime.now().date()  # guarda la fecha
-        print(f'{fecha_actual} \nID Venta: {id_venta} asignado de forma automatica')
+        print(f'{fecha_actual} \nID Venta: {id_venta} asignado de forma automática')
         while True:
             try:
                 id_vendedor = int(input('Ingrese su ID de cajero: '))
@@ -97,7 +97,7 @@ class GestionVentas:
                     print('Por favor verifique su PIN')
 
             except  Exception as e:
-                print(f'Ocurrio un error en ventas por favor verificar {e}')
+                print(f'Ocurrió un error en ventas por favor verificar {e}')
         while True:
             try:
                 nit = input('NIT cliente:  ')
@@ -106,10 +106,10 @@ class GestionVentas:
                     break
 
                 else:
-                    gestor_clientes.agregar_cliente() #si el NIT no existe entonces gurrda un nuevo clinete
+                    gestor_clientes.agregar_cliente() #si el NIT no existe entonces guarda un nuevo cliente
                     break
             except Exception as e:
-                print('Ocurrio un error en la asociacion del cliente con la compra')
+                print('Ocurrió un error en la asociación del cliente con la compra')
 
         compra_tmp = Venta(id_venta, fecha_actual, id_vendedor, nit)
 

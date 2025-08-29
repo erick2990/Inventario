@@ -3,21 +3,19 @@ class Clientes:
     def __init__(self, nit,nombre, telefono):
         self.__nit = nit
         self.__nombre = nombre
-        self.__telefono = telefono
+        self.telefono = telefono
         self.compras = {}  # Compras que ha realizado el cliente
 
     def get_nit(self):
         return self.__nit
     def get_nombre(self):
         return self.__nombre
-    def get_telefono(self):
-        return self.__telefono
 
 
     def __str__(self):
         resumen = (
-            f"Cliente: {self.__nombre} | NIT: {self.__nit}\n"
-            f"Teléfono: {self.__telefonos}\n"
+            f"Cliente: {self.get_nombre()} | NIT: {self.get_nit()}\n"
+            f"Teléfono: {self.telefono}\n"
         )
         if self.compras:
             resumen += f"Compras realizadas: {len(self.compras)}\n"

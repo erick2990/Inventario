@@ -20,19 +20,11 @@ class Datos:
         return self.__direccion
 
 def registrar_empresa():
-     while True:
-         print('\t\t\tBienvenido al sistema de inventarios')
-         nombre_empresa = input('Ingrese el nombre de la empresa: ')
-         if nombre_empresa == "":
-            print(' Por favor ingrese un nombre válido.')
-            continue
-         direccion = input('Ingrese la dirección de la empresa: ')
-         if direccion == "":
-            print('Por favor ingrese una dirección válida.')
-            continue
-         empresa = Datos(nombre_empresa, direccion)  # guardar los datos de la empresa
-         print('Datos guardados correctamente.')
-         return empresa #retorna datos de la empresa
+        nombre_empresa = "Ferreteria"
+        direccion = "23 avenida zona 3"
+        empresa = Datos(nombre_empresa, direccion)  # guardar los datos de la empresa
+        print('Datos guardados correctamente.')
+        return empresa #retorna datos de la empresa
 
 
 def menu_principal(empresa):
@@ -49,10 +41,11 @@ def menu_principal(empresa):
 
         while fin_menu:
             try:
+                print('\n')
                 print(f'\t\tSistema de control para la empresa {empresa.get_empresa()} ubicacion: {empresa.get_direccion()}')
-                print('1. Ingresar como Administrador \n2. Ingresar como cajero \n3. Ingresar como visitante')
-                print('4. Salir del programa')
-                opcion  =int(input('Digite la opcion que desea ingresar: '))
+                print('\t1. Ingresar como Administrador \n\t2. Ingresar como cajero \n\t3. Ingresar como visitante')
+                print('\t4. Salir del programa')
+                opcion = int(input('Digite la opción que desea ingresar: '))
                 match opcion:
                     case 1:
                         print('Administrador')
@@ -62,10 +55,10 @@ def menu_principal(empresa):
                         else:
                             print('Por favor intente más tarde')
                     case 2:
-                        print('Cajero')
+                        print('\nCajero')
                         gestor_ventas.realizar_venta(gestor_clientes, gestor_empleados, gestor_productos)
                     case 3:
-                        print('Visitante')
+                        print('\nVisitante')
                         print('Funcion en construccion')
 
                     case 4:

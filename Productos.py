@@ -24,6 +24,8 @@ class Producto:
         return self.__precio_compra
     def get_stock(self):
         return self.__stock
+    def get_ganancia(self):
+        return self.__ganancia
     def set_precio_compra(self, nuevo_precio_compra):
         if nuevo_precio_compra>0:
             self.__precio_compra = nuevo_precio_compra
@@ -41,10 +43,10 @@ class Producto:
 
     def __str__(self):
         return (
-            f'Producto: {self.__nombre} | ID: {self.__id_producto} | '
-            f'Categoría: {self.__id_categoria} | Proveedor: {self.__id_proveedor} | '
-            f'Compra: Q{self.__precio_compra:.2f} | Venta: Q{self.__precio_venta:.2f} | '
-            f'Ganancia: Q{self.__ganancia:.2f} | Stock: {self.__stock} unidades'
+            f'Producto: {self.get_nombre_product()} | ID: {self.get_id_producto()} | '
+            f'Categoría: {self.get_id_categoria()} | Proveedor: {self.get_id_proveedor()} | '
+            f'Compra: Q{self.get_precio_compra():.2f} | Venta: Q{self.get_precio_venta():.2f} | '
+            f'Ganancia: Q{self.get_ganancia():.2f} | Stock: {self.get_stock()} unidades'
         )
 
 
@@ -126,7 +128,7 @@ class GestionProductos:
                     print(f'Ocurrió un error en el ingreso de stock - inténtelo nuevamente {e}')
 
 
-            print('\nSe desplegara el listado de categorias y respectivos proveedores, ingrese el ID de cada uno según se indique')
+            print('\nSe desplegara el listado de categorías y respectivos proveedores, ingrese el ID de cada uno según se indique')
             gestor_categorias.mostrar_categorias() #Despliegue de categorias y proveedores
             while True:
                 try:
@@ -135,6 +137,7 @@ class GestionProductos:
                         buscar = True
                         while buscar:
                             try:
+                                print('\n')
                                 id_proveedor_categoria = int(input(f'Ingrese el ID del proveedor de la categoria {id_categoria_producto}: '))
                                 proveedores_asociados = gestor_categorias.diccionario_cat[id_categoria_producto].listado_proveedores #se devuelve como lista
                                 proveedor_valido = False

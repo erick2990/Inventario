@@ -25,7 +25,7 @@ class Categoria:
 
     def __str__(self):
         proveedores = ', '.join(self.listado_proveedores) if self.listado_proveedores else 'Sin proveedores asociados'
-        return f'ID: {self.__id_categoria}  Nombre: {self.__nombre_categoria}  Proveedores: {proveedores}'
+        return f'ID: {self.get_id_categoria()}  Nombre: {self.get_nombre_categoria()}  Proveedores: {proveedores}'
 
 class GestionCategorias:
 
@@ -66,13 +66,13 @@ class GestionCategorias:
     def agregar_categorias(self):
         fin_agregar = True
 
-        print('Ingrese todos los datos correspodientes: \n\n')
+        print('Ingrese todos los datos correspondientes: \n\n')
 
         while fin_agregar:
             try:
-
-                id_categoria = len(list(self.diccionario_cat)) +1 #El ID que tomara es automatico y empieza en 1
-                print(f'ID de categoria automatico: {id_categoria}')
+                print('\n')
+                id_categoria = len(list(self.diccionario_cat)) +1 #El ID que tomara es por defecto y empieza en 1
+                print(f'ID de categoria automático: {id_categoria}')
                 nombre_categoria = input('Ingrese el nombre de la categoria: ').upper()
                 existencia_nombres = [cat.get_nombre_categoria().upper() for cat in self.diccionario_cat.values()] #lista por comprension
                 if nombre_categoria in existencia_nombres:
@@ -95,5 +95,5 @@ class GestionCategorias:
                             print('Entrada no valida por favor intentarlo de nuevo')
 
             except Exception as e:
-                print(f'Error - Por favor verificar agregar categorias {e}')
+                print(f'Error - Por favor verificar agregar categorías {e}')
 

@@ -67,7 +67,7 @@ class GestionProveedores:
 
         while fin_agregar:
             id_proveedor = len(list(self.diccionario_prov))+2
-            print(f'ID de proveedor asignado de forma automatica: {id_proveedor}')
+            print(f'ID de proveedor asignado de forma automática: {id_proveedor}')
             nombre = input('Ingrese el nombre de la empresa: ')
             telefono = input('Ingrese el numero de teléfono: ')
             dir = input('Ingrese la dirección: ')
@@ -78,7 +78,7 @@ class GestionProveedores:
             print('Asocie el proveedor con la categoria que provee: \n\n')
             gestor_categorias.mostrar_categorias() #muestra las categorias disponibles
             while True:
-                print('PRESIONE (0) PARA FINALIZAR LA ASOCIACIÓN')
+                print(F'PRESIONE (0) PARA FINALIZAR LA ASIGNACIÓN DE CATEGORIAS AL PROVEEDOR {nombre}')
                 cat_asociada = int(input('\nIngrese la categoria que desea asociar con el actual proveedor: '))
                 if cat_asociada in gestor_categorias.diccionario_cat.keys(): #se verifica si esta en las llaves
                    categroria_objeto = gestor_categorias.diccionario_cat[cat_asociada]
@@ -86,14 +86,14 @@ class GestionProveedores:
                        print('Esta proveedor ya fue asociado intente con otra categoria')
                    else:
                        categroria_objeto.agregar_proveedor_categoria(proveedor_tmp) #Se envia el objeto proveedor para ser guardado
-                       print('¡¡¡Proveedor asociado con exito!!!\n')
+                       print('¡¡¡Proveedor asociado con éxito!!!\n')
                 if cat_asociada== 0:
-                    print('Asociasiones temrinadas')
+                    print('Asociaciones terminadas')
                     break
 
             while True:
                 print('\n\n')
-                agregar = input('¿Desea ingresar otra Proveedor? S/N: ').upper()
+                agregar = input('¿DESEA INGRESAR OTRO PROVEEDOR? S/N: ').upper()
                 if agregar == "S":
                     break
                 elif agregar == "N":

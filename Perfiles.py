@@ -46,9 +46,10 @@ class EntornoAdmin:
 
         while fin_admin:
             try:
-                print('--- Bievenido Administrdor ---')
-                print('1. Ingresar Categorías \n2. Ingresar Proveedor \n3. Realizar Compra / Abastecer/ \n4. Mostrar categorias y proveedor')
-                print('5. Historial de compras \n6. Contratar Trabjadores \n7. Historial de Ventas \n8. Salir')
+                print('\n')
+                print('--- Bienvenido Administrador ---')
+                print('1. Ingresar Categorías \n2. Ingresar Proveedor \n3. Realizar Compra / Abastecer/ \n4. Mostrar categorías y proveedor')
+                print('5. Historial de compras \n6. Contratar Trabajadores \n7. Historial de Ventas \n8. Salir')
                 opcion = int(input('Seleccione la opción: '))
                 match opcion:
                     case 1:
@@ -70,7 +71,7 @@ class EntornoAdmin:
                                             gestor_compras.realizar_compra(gestor_productos, gestor_categorias)
 
                                         case 2:
-                                            print('\nAbasecimiento productos: ')
+                                            print('\nAbastecimiento productos: ')
                                             gestor_compras.realizar_abastecimiento(gestor_productos)
                                         case 3:
                                             print('Regresando a menu admin')
@@ -80,7 +81,7 @@ class EntornoAdmin:
                                 except Exception as e:
                                     print(f'Error por favor verifique el submenu {e}')
                         else:
-                            print('Datos vacios no se pueden realizar las compras')
+                            print('Datos vacíos no se pueden realizar las compras')
                     case 4:
                         print('\n')
                         gestor_categorias.mostrar_categorias()
@@ -101,6 +102,6 @@ class EntornoAdmin:
                         print('Opción invalida por favor verifique nuevamente')
 
             except Exception as e:
-                print('Ocurrio un error en el menú de administrador por favor verificar')
+                print('Ocurrió un error en el menú de administrador por favor verificar')
 
 
