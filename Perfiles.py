@@ -47,7 +47,7 @@ class EntornoAdmin:
         while fin_admin:
             try:
                 print('--- Bievenido Administrdor ---')
-                print('1. Ingresar Categorías \n2. Ingresar Proveedor \n3. Realizar Compra / Abastecer/ \n4. Mostrar compras')
+                print('1. Ingresar Categorías \n2. Ingresar Proveedor \n3. Realizar Compra / Abastecer/ \n4. Mostrar categorias y proveedor')
                 print('5. Historial de compras \n6. Contratar Trabjadores \n7. Historial de Ventas \n8. Salir')
                 opcion = int(input('Seleccione la opción: '))
                 match opcion:
@@ -62,7 +62,7 @@ class EntornoAdmin:
                             while True:
                                 try:
                                     print('1. Ingresar compra de productos NUEVOS \n2. Ingresar compra de productos EXISTENTES')
-                                    print('\n3. Salir')
+                                    print('3. Salir')
                                     opcion_s = int(input('Ingrese la opción a la que desee ingresar: '))
                                     match opcion_s:
                                         case 1:
