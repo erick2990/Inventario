@@ -13,6 +13,12 @@ class Proveedor:
         return self.__id_proveedor
     def get_empresa_proveedor(self):
         return self.__nombre_empresa
+    def get_cel_proveedor(self):
+        return self.__cel_proveedor
+    def get_dir_proveedor(self):
+        return self.__dir_proveedor
+    def get_correo_proveedor(self):
+        return self.__correo_proveedor
     def set_cel_proveedor(self, nuevo_cel):
         self.__cel_proveedor = nuevo_cel
     def set_dir_proveedor(self, nueva_dir):
@@ -22,21 +28,38 @@ class Proveedor:
 
     def __str__(self): #solo se invoca el objeto
         return (
-            f'ID: {self.__id_proveedor} | Empresa: {self.__nombre_empresa} | '
-            f'Celular: {self.__cel_proveedor} | Dirección: {self.__dir_proveedor} | '
-            f'Correo: {self.__correo_proveedor}'
+            f'ID: {self.get_id_proveedor()} | Empresa: {self.get_empresa_proveedor()} | '
+            f'Celular: {self.get_cel_proveedor()} | Dirección: {self.get_dir_proveedor()} | '
+            f'Correo: {self.get_correo_proveedor()}'
         )
 
 class GestionProveedores:
 
     def __init__(self):
         self.diccionario_prov = {}
-    def diccionario_proveedores(self):
-        return self.diccionario_prov
+        self.cargar_proveedores()
 
     def mostrar_proveedores(self):
         for llave, campo in self.diccionario_prov.items():
             print(f'ID: {llave}  Información: {campo} ')
+
+    def guardar_proveedores(self, archivo="proveedores.txt"):
+        with open(archivo, "w", encoding="utf-8") as f:
+            for prov in self.diccionario_prov.values():
+                f.write(
+                    f"{prov.get_id_proveedor()}:{prov.get_empresa_proveedor()}:{prov.get_cel_proveedor()}:"
+                    f"{prov.get_dir_proveedor()}:{prov.get_correo_proveedor()}\n"
+                )
+
+    def cargar_proveedores(self, archivo="proveedores.txt"):
+        try:
+            with open(archivo, "r", encoding="utf-8") as f:
+                for linea in f:
+                    id_prov, nombre, cel, dir, correo = linea.strip().split(":")
+                    proveedor = Proveedor(int(id_prov), nombre, cel, dir, correo)
+                    self.diccionario_prov[int(id_prov)] = proveedor
+        except FileNotFoundError:
+            print("proveedores.txt no encontrado. Se creará al guardar.")
 
 
     def agregar_proveedores(self, gestor_categorias):
