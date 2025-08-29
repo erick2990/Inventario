@@ -29,16 +29,15 @@ class LoginAdmin:
         print('Se terminaron los intentos validos')
 
 class EntornoAdmin:
-    print('clase para el admin')
 
-    def menu_admin(self, gestor_categorias, gestor_proveedores, gestor_productos, gestor_compras, gestor_empleados):
+    def menu_admin(self, gestor_categorias, gestor_proveedores, gestor_productos, gestor_compras, gestor_empleados, gestor_ventas):
         fin_admin = True
 
         while fin_admin:
             try:
                 print('--- Bievenido Administrdor ---')
-                print('1. Ingresar Categorías \n2. Ingresar Proveedor \n3. Realizar Compra / Abastecer/ HISTORIAL \n4. Mostrar Categorias')
-                print('5. \n6. Modificar producto \n7. Salir')
+                print('1. Ingresar Categorías \n2. Ingresar Proveedor \n3. Realizar Compra / Abastecer/ \n4. Mostrar compras')
+                print('5. Historial de compras \n6. Contratar Trabjadores \n7. Historial de Ventas \n8. Salir')
                 opcion = int(input('Seleccione la opción: '))
                 match opcion:
                     case 1:
@@ -51,8 +50,8 @@ class EntornoAdmin:
                         if gestor_categorias.diccionario_cat and gestor_proveedores.diccionario_prov:
                             while True:
                                 try:
-                                    print('1. Ingresar compra de productos NUEVOS \n2. Ingresar compra de productos EXISTENTES\n3. Mostrar compras')
-                                    print('\n4. Contratar Trabajadores  \n5. Salir')
+                                    print('1. Ingresar compra de productos NUEVOS \n2. Ingresar compra de productos EXISTENTES')
+                                    print('\n3. Salir')
                                     opcion_s = int(input('Ingrese la opción a la que desee ingresar: '))
                                     match opcion_s:
                                         case 1:
@@ -62,14 +61,7 @@ class EntornoAdmin:
                                         case 2:
                                             print('\nAbasecimiento productos: ')
                                             gestor_compras.realizar_abastecimiento(gestor_productos)
-
                                         case 3:
-                                            print('\nHistorial de compras: ')
-                                            gestor_compras.mostrar_compras()
-                                        case 4:
-                                            print('Contrato de personal: ')
-                                            gestor_empleados.agregar_empleado() #Aqui se crean los trabajadores
-                                        case 5:
                                             print('Regresando a menu admin')
                                             break
                                         case _:
@@ -82,10 +74,16 @@ class EntornoAdmin:
                         print('\n')
                         gestor_categorias.mostrar_categorias()
                     case 5:
-                        print('Empleados')
+                        print('\nHistorial de compras: ')
+                        gestor_compras.mostrar_compras()
+
                     case 6:
-                        print('Administrador puede cambiar/ pCompra/pVenta/Stock/proveedor')
+                        print('Contrato de personal: ')
+                        gestor_empleados.agregar_empleado()  # Aqui se crean los trabajadores
                     case 7:
+                        print('Historial Ventas: ')
+                        gestor_ventas.mostrar_ventas()
+                    case 8:
                         print('Saliendo del modo administrador')
                         fin_admin = False
                     case _:

@@ -1,9 +1,11 @@
+import Clientes
 import Compras
 import Perfiles
 import Categorias
 import Productos
 import Proveedores
 import Empleados
+import Ventas
 
 #archivo main
 class Datos:
@@ -42,6 +44,8 @@ def menu_principal(empresa):
         gestor_productos = Productos.GestionProductos()
         gestor_compras = Compras.GestionCompras()
         gestor_empleados = Empleados.GestionEmpleados()
+        gestor_clientes = Clientes.GestionClientes()
+        gestor_ventas = Ventas.GestionVentas()
 
         while fin_menu:
             try:
@@ -54,12 +58,12 @@ def menu_principal(empresa):
                         print('Administrador')
                         if administrador.inicio_sesion():
                             print('ACCEDIENDO COMO ADMINISTRADOR....\n')
-                            dinamica_admin.menu_admin(gestor_categorias, gestor_proveedores, gestor_productos, gestor_compras, gestor_empleados)
+                            dinamica_admin.menu_admin(gestor_categorias, gestor_proveedores, gestor_productos, gestor_compras, gestor_empleados, gestor_ventas)
                         else:
                             print('Por favor intente más tarde')
                     case 2:
                         print('Cajero')
-
+                        gestor_ventas.realizar_venta(gestor_clientes, gestor_empleados, gestor_productos)
                     case 3:
                         print('Visitante')
 

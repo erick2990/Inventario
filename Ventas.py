@@ -1,9 +1,5 @@
 from datetime import  datetime
-
-from pcbnew import VECTOR_VECTOR2I
-
 from Productos import Producto
-
 
 #Archivo ventas
 
