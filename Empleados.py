@@ -30,20 +30,25 @@ class GestionEmpleados:
 
     def __init__(self):
         self.diccionario_empleados = {}
+        self.cargar_empleados()
 
 
     def agregar_empleado(self):
         print('Ingrese los datos adecuados para el nuevo trabajador: ')
         id_empleado = len(list(self.diccionario_empleados)) + 2
-        nombre = input('Ingrese el nombre: ')
+        nombre = input('Nombre: ')
         print(f'El ID: {id_empleado}  se asignara al trabajador: {nombre}')
-        telefono = input('Ingrese el numero de telefono: ')
-        direccion = input('Ingrese la direccion: ')
-        correo = input('Ingrese el correo electronico: ')
-
+        telefono = input('Teléfono: ')
+        direccion = input('Dirección: ')
+        correo = input('Correo electronico: ')
         empleado_tmp = Empleados(id_empleado, nombre, telefono, direccion, correo)
         self.diccionario_empleados[id_empleado] = empleado_tmp #se guarda el empleado introducido en el diccionario de empelados
+        self.guardar_empleados()
         print('¡¡Empleado guardado de forma exitosa!!')
+
+    def existencia_valida(self, id_vendedor):
+        # Metodo que retorna True si el id es correcto para la asociacion de la venta
+        return id_vendedor in self.diccionario_empleados
 
     def acreditar_venta(self, id_empleado, objeto_venta):
         if id_empleado in self.diccionario_empleados:
@@ -53,10 +58,24 @@ class GestionEmpleados:
         else:
             print("Empleado no encontrado.")
 
+    def guardar_empleados(self, archivo="empleados.txt"):
+        with open(archivo, "w", encoding="utf-8") as f:
+            for id_empleado, emp in self.diccionario_empleados.items():
+                f.write(
+                    f"{id_empleado}:{emp.get_nombre_empleado()}:{emp._Empleados__telefono}:{emp.direccion}:{emp.correo}\n")
 
-    def existencia_valida(self, id_vendedor):
-        #Metodo que retorna True si el id es correcto para la asociacion de la venta
-        return id_vendedor in self.diccionario_empleados
+    def cargar_empleados(self, archivo="empleados.txt"):
+        try:
+            with open(archivo, "r", encoding="utf-8") as f:
+                for linea in f:
+                    id_empleado, nombre, telefono, direccion, correo = linea.strip().split(":")
+                    self.diccionario_empleados[int(id_empleado)] = Empleados(int(id_empleado), nombre, telefono,
+                                                                             direccion, correo)
+        except FileNotFoundError:
+            print("empleados.txt no encontrado. Se creará al guardar.")
+
+
+
 
 
 
