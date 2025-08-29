@@ -31,18 +31,6 @@ class GestionClientes:
         self.diccionario_clientes = {}
         self.cargar_clientes()
 
-    def agregar_cliente(self):
-        nit = input("Ingrese el NIT del cliente: ")
-        if nit in self.diccionario_clientes:
-            print("⚠Este NIT ya está registrado.")
-            return
-        nombre = input("Ingrese el nombre del cliente: ")
-        telefono = input("Ingrese el número de teléfono: ")
-        cliente_tmp = Clientes(nit, nombre, telefono)
-        self.diccionario_clientes[nit] = cliente_tmp
-        self.guardar_clientes()
-        print("Cliente agregado exitosamente.")
-
     def cliente_existe(self, nit):
         return nit in self.diccionario_clientes
 
@@ -57,7 +45,7 @@ class GestionClientes:
     def guardar_clientes(self, archivo="clientes.txt"):
         with open(archivo, "w", encoding="utf-8") as f:
             for nit, cliente in self.diccionario_clientes.items():
-                f.write(f"{nit}:{cliente.get_nombre()}:{cliente.get_telefono}\n")
+                f.write(f"{nit}:{cliente.get_nombre()}:{cliente.telefono}\n")
 
     def cargar_clientes(self, archivo="clientes.txt"):
         try:
@@ -68,5 +56,13 @@ class GestionClientes:
         except FileNotFoundError:
             print(" clientes.txt no encontrado. Se creará al guardar.")
 
+    def agregar_cliente(self, nit_recibido):
+        nit = nit_recibido
+        nombre = input("Ingrese el nombre del cliente: ")
+        telefono = input("Ingrese el número de teléfono: ")
+        cliente_tmp = Clientes(nit, nombre, telefono)
+        self.diccionario_clientes[nit] = cliente_tmp
+        self.guardar_clientes()
+        print("Cliente agregado exitosamente.")
 
 

@@ -41,7 +41,7 @@ class GestionProveedores:
 
     def mostrar_proveedores(self):
         for llave, campo in self.diccionario_prov.items():
-            print(f'ID: {llave}  Información: {campo} ')
+            print(f'Información: {campo} ')
 
     def guardar_proveedores(self, archivo="proveedores.txt"):
         with open(archivo, "w", encoding="utf-8") as f:
@@ -66,9 +66,13 @@ class GestionProveedores:
         fin_agregar = True
 
         while fin_agregar:
+            print('\t\t\tINGRESE 0 SI DESEA REGRESAR AL MENU ANTERIOR')
             id_proveedor = len(list(self.diccionario_prov))+2
             print(f'ID de proveedor asignado de forma automática: {id_proveedor}')
             nombre = input('Ingrese el nombre de la empresa: ')
+            if int(nombre) ==0:
+                print('Regresando...')
+                break
             telefono = input('Ingrese el numero de teléfono: ')
             dir = input('Ingrese la dirección: ')
             correo = input('Ingrese el correo: ')

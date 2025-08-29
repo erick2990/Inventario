@@ -48,13 +48,15 @@ class EntornoAdmin:
             try:
                 print('\n')
                 print('--- Bienvenido Administrador ---')
-                print('1. Ingresar Categorías \n2. Ingresar Proveedor \n3. Realizar Compra / Abastecer/ \n4. Mostrar categorías y proveedor')
-                print('5. Historial de compras \n6. Contratar Trabajadores \n7. Historial de Ventas \n8. Salir')
+                print('1. Ingresar Categorías \n2. Ingresar Proveedor \n3. Realizar Compra / Abastecer/ \n4. Mostrar Cajeros')
+                print('5. Historial de compras \n6. Contratar Trabajadores \n7. Historial de Ventas\n8.Mostrar Productos \n9. Salir')
                 opcion = int(input('Seleccione la opción: '))
                 match opcion:
                     case 1:
                         gestor_categorias.agregar_categorias()
                     case 2:
+                        print('Listado de proveedores actuales: ')
+                        gestor_proveedores.mostrar_proveedores()
                         print('\n')
                         gestor_proveedores.agregar_proveedores(gestor_categorias)
                     case 3:
@@ -84,7 +86,7 @@ class EntornoAdmin:
                             print('Datos vacíos no se pueden realizar las compras')
                     case 4:
                         print('\n')
-                        gestor_categorias.mostrar_categorias()
+                        gestor_empleados.mostrar_empleados()
                     case 5:
                         print('\nHistorial de compras: ')
                         gestor_compras.mostrar_compras()
@@ -96,6 +98,9 @@ class EntornoAdmin:
                         print('Historial Ventas: ')
                         gestor_ventas.mostrar_ventas()
                     case 8:
+                        print('Productos existentes: ')
+                        gestor_productos.mostrar_productos()
+                    case 9:
                         print('Saliendo del modo administrador')
                         fin_admin = False
                     case _:

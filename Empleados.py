@@ -33,19 +33,14 @@ class GestionEmpleados:
         self.diccionario_empleados = {}
         self.cargar_empleados()
 
+    def mostrar_empleados(self):
 
-    def agregar_empleado(self):
-        print('\t\tIngrese los datos adecuados para el nuevo trabajador: ')
-        id_empleado = len(list(self.diccionario_empleados)) + 2
-        nombre = input('Nombre: ')
-        print(f'El ID: {id_empleado}  se asignara al trabajador: {nombre}')
-        telefono = input('Teléfono: ')
-        direccion = input('Dirección: ')
-        correo = input('Correo electrónico: ')
-        empleado_tmp = Empleados(id_empleado, nombre, telefono, direccion, correo)
-        self.diccionario_empleados[id_empleado] = empleado_tmp #se guarda el empleado introducido en el diccionario de empelados
-        self.guardar_empleados()
-        print('¡¡Empleado guardado de forma exitosa!!')
+        if self.diccionario_empleados:
+            for llave, campo in self.diccionario_empleados.items():
+                print(f'Empleados: {campo}')
+
+        else:
+            print('No hay empleados contratados aún')
 
     def existencia_valida(self, id_vendedor):
         # Metodo que retorna True si el id es correcto para la asociacion de la venta
@@ -63,7 +58,7 @@ class GestionEmpleados:
         with open(archivo, "w", encoding="utf-8") as f:
             for id_empleado, emp in self.diccionario_empleados.items():
                 f.write(
-                    f"{id_empleado}:{emp.get_nombre_empleado()}:{emp._Empleados__telefono}:{emp.direccion}:{emp.correo}\n")
+                    f"{id_empleado}:{emp.get_nombre_empleado()}:{emp.telefono}:{emp.direccion}:{emp.correo}\n")
 
     def cargar_empleados(self, archivo="empleados.txt"):
         try:
@@ -75,7 +70,18 @@ class GestionEmpleados:
         except FileNotFoundError:
             print("empleados.txt no encontrado. Se creará al guardar.")
 
-
+    def agregar_empleado(self):
+        print('\t\tIngrese los datos adecuados para el nuevo trabajador: ')
+        id_empleado = len(list(self.diccionario_empleados)) + 2
+        nombre = input('Nombre: ')
+        print(f'El ID: {id_empleado}  se asignara al trabajador: {nombre}')
+        telefono = input('Teléfono: ')
+        direccion = input('Dirección: ')
+        correo = input('Correo electrónico: ')
+        empleado_tmp = Empleados(id_empleado, nombre, telefono, direccion, correo)
+        self.diccionario_empleados[id_empleado] = empleado_tmp #se guarda el empleado introducido en el diccionario de empelados
+        self.guardar_empleados()
+        print('¡¡Empleado guardado de forma exitosa!!')
 
 
 

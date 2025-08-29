@@ -26,7 +26,6 @@ class GestionCompras:
 
     def mostrar_compras(self):
         for llave, campo in self.diccionario_historial_compras.items():
-            print(f'Compra: {llave}')
             print(f'{campo}')
 
     def guardar_compras(self, archivo="compras.txt"):

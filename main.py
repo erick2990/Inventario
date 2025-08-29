@@ -71,7 +71,7 @@ def menu_principal(empresa):
                         gestor_categorias.guardar_categorias()
                         gestor_compras.guardar_compras()
                         gestor_ventas.guardar_ventas()
-                        fin_menu = False
+                        break
                     case _:
                         print('Error por favor ingrese una entrada valida')
             except Exception as e:

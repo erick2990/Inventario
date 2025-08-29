@@ -83,7 +83,7 @@ class GestionVentas:
             print("-" * 40)
 
     def realizar_venta(self, gestor_clientes, gestor_empleados, gestor_productos):
-        print('Logica de venta')
+        print('\t\t\tSistema de ventas:')
         id_venta = len(list(self.diccionario_ventas_generales)) + 5 #Id de las ventas de forma automática
         fecha_actual = datetime.now().date()  # guarda la fecha
         print(f'{fecha_actual} \nID Venta: {id_venta} asignado de forma automática')
@@ -101,12 +101,12 @@ class GestionVentas:
         while True:
             try:
                 nit = input('NIT cliente:  ')
-                if  gestor_clientes.existencia_valida(nit):  #Si ya existe entonces no agrega nada solo se queda en el nit
+                if  gestor_clientes.cliente_existe(nit):  #Si ya existe entonces no agrega nada solo se queda en el nit
                     print('El cliente ya existe!')
                     break
 
                 else:
-                    gestor_clientes.agregar_cliente() #si el NIT no existe entonces guarda un nuevo cliente
+                    gestor_clientes.agregar_cliente(nit) #si el NIT no existe entonces guarda un nuevo cliente
                     break
             except Exception as e:
                 print('Ocurrió un error en la asociación del cliente con la compra')
