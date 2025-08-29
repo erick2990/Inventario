@@ -59,8 +59,10 @@ def menu_principal(empresa):
                             print('Por favor intente más tarde')
                     case 2:
                         print('Cajero')
+
                     case 3:
                         print('Visitante')
+
                     case 4:
                         print('Gracias por usar el sistema')
                         fin_menu = False

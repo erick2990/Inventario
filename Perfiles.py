@@ -68,7 +68,7 @@ class EntornoAdmin:
                                             gestor_compras.mostrar_compras()
                                         case 4:
                                             print('Contrato de personal: ')
-                                            #gestor_empleados. pendiente el metodo de agregar de modo manual los empleados
+                                            gestor_empleados.agregar_empleado() #Aqui se crean los trabajadores
                                         case 5:
                                             print('Regresando a menu admin')
                                             break
