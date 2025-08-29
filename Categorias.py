@@ -15,7 +15,6 @@ class Categoria:
 
 
     def agregar_proveedor_categoria(self, objeto_proveedor):
-        print(f'Proveedor {objeto_proveedor}')
         self.listado_proveedores.append(objeto_proveedor) #se guarda unicamente por ID ya que es la llave foranea
 
     def eliminar_proveedor(self, id_proveedor):
@@ -29,8 +28,9 @@ class Categoria:
 
 class GestionCategorias:
 
-    def __init__(self):
+    def __init__(self, gestor_proveedores):
         self.diccionario_cat = {}
+        self.cargar_categorias(gestor_proveedores)
 
 
     def guardar_categorias(self, archivo="categorias.txt"):
@@ -56,12 +56,16 @@ class GestionCategorias:
             print("categorias.txt no encontrado. Se creará al guardar.")
 
     def mostrar_categorias(self):
-        for llave, campo in self.diccionario_cat.items():
-            print(f'ID CATEGORIA: {llave} NOMBRE CATEGORIA: {campo.get_nombre_categoria()}')
-            print(f'LISTADO PROVEEDORES: ')
-            for x in campo.get_listado_proveedores():
-                print(f'Empresa: {x.get_empresa_proveedor()} ID_PROVEEDOR: {x.get_id_proveedor()} ')
-            print('\n')
+        if not self.diccionario_cat:
+            print('NO HAY CATEGORIAS AÚN')
+
+        else:
+            for llave, campo in self.diccionario_cat.items():
+                print(f'ID CATEGORIA: {llave} NOMBRE CATEGORIA: {campo.get_nombre_categoria()}')
+                print(f'LISTADO PROVEEDORES: ')
+                for x in campo.get_listado_proveedores():
+                    print(f'Empresa: {x.get_empresa_proveedor()} ID_PROVEEDOR: {x.get_id_proveedor()} ')
+                print('\n')
 
     def agregar_categorias(self):
         fin_agregar = True

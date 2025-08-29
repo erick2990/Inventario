@@ -1,4 +1,7 @@
 #Archivo productos
+from orca.debug import print_message
+
+
 class Producto:
     def __init__(self, nombre, id_producto, id_categoria, id_proveedor, precio_compra, precio_venta, stock):
         self.__nombre =  nombre
@@ -38,6 +41,7 @@ class Producto:
             print('¡Cambio de precio de venta exitoso!')
         else:
             print('El precio de venta debe ser mayor para obtener ganancias')
+
     def set_stock(self, nuevo_stock):
         self.__stock = nuevo_stock
 
@@ -46,7 +50,7 @@ class Producto:
             f'Producto: {self.get_nombre_product()} | ID: {self.get_id_producto()} | '
             f'Categoría: {self.get_id_categoria()} | Proveedor: {self.get_id_proveedor()} | '
             f'Compra: Q{self.get_precio_compra():.2f} | Venta: Q{self.get_precio_venta():.2f} | '
-            f'Ganancia: Q{self.get_ganancia():.2f} | Stock: {self.get_stock()} unidades'
+            f'Stock: {self.get_stock()} unidades| Ganancia: Q{self.get_ganancia():.2f} '
         )
 
 
@@ -61,7 +65,7 @@ class GestionProductos:
 
     def mostrar_productos(self):
         if not self.diccionario_productos:
-            print('Diccionario vació')
+            print('NO HAY REGISTROS AÚN')
 
         for llave, campo in self.diccionario_productos.items():
             print(f'ID Producto: {llave}')
@@ -93,7 +97,6 @@ class GestionProductos:
         global id_proveedor_categoria
         fin_agregar_p = True
         productos_nuevos = {} #Este diccionario sirve para enviar a las compras
-        print('\t\tAñadir productos nuevos al inventario\n\n')
         while fin_agregar_p:
             print('\t\tINGRESE LOS DATOS CORRESPONDIENTES DEL PRODUCTO:')
             nombre_producto = input('Ingrese el nombre: ')      #nombre producto
@@ -176,12 +179,8 @@ class GestionProductos:
     def abastecer(self):
         print('\nAbastecimiento de productos existentes\n')
 
-        if not self.diccionario_productos:
-            print('No hay productos registrados para abastecer.')
-            return {}
-
         self.mostrar_productos()
-        productos_abastecidos = {}
+        productos_abastecidos = {} #Diccionario de productos que se han abestecido
 
         while True:
             try:
@@ -218,5 +217,28 @@ class GestionProductos:
                 print('Entrada no válida. Se asumirá que no desea continuar.')
                 break
             return productos_abastecidos #Aqui retorna el diccionario de productos que se abastecieron en esta sesion
+
+    def modificar_precio_venta_compra(self):
+        id_modificar = input('Ingrese el ID del producto a modificar: ')
+
+        if id_modificar in self.diccionario_productos:
+            producto_mod = self.diccionario_productos[id_modificar]
+            while True:
+                print('1. Modificar precio venta \n2. Modificar precio compra 3. CANCELAR')
+                opcion = int(input('Ingrese la opción: '))
+                match opcion:
+                    case 1:
+                        producto_mod.set_precio_venta()
+                    case 2:
+                        producto_mod.set_precio_compra()
+                    case 3:
+                        print('Regresando')
+                        print('---' * 40)
+                        break
+                    case _:
+                        print('ERROR - Esta opción no existe')
+        else:
+            print('Producto no existe')
+
 
 

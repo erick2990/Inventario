@@ -40,8 +40,11 @@ class GestionProveedores:
         self.cargar_proveedores()
 
     def mostrar_proveedores(self):
-        for llave, campo in self.diccionario_prov.items():
-            print(f'Información: {campo} ')
+        if not self.diccionario_prov:
+            print('NO HAY PROVEEDORES AÚN')
+        else:
+            for llave, campo in self.diccionario_prov.items():
+                print(f'Información: {campo} ')
 
     def guardar_proveedores(self, archivo="proveedores.txt"):
         with open(archivo, "w", encoding="utf-8") as f:
@@ -66,20 +69,16 @@ class GestionProveedores:
         fin_agregar = True
 
         while fin_agregar:
-            print('\t\t\tINGRESE 0 SI DESEA REGRESAR AL MENU ANTERIOR')
             id_proveedor = len(list(self.diccionario_prov))+2
             print(f'ID de proveedor asignado de forma automática: {id_proveedor}')
             nombre = input('Ingrese el nombre de la empresa: ')
-            if int(nombre) ==0:
-                print('Regresando...')
-                break
             telefono = input('Ingrese el numero de teléfono: ')
             dir = input('Ingrese la dirección: ')
             correo = input('Ingrese el correo: ')
             proveedor_tmp = Proveedor(id_proveedor, nombre, telefono, dir, correo) #Se crea el proveedor
             self.diccionario_prov[id_proveedor] = proveedor_tmp #se agrega al diccionario de proveedores
-
-            print('Asocie el proveedor con la categoria que provee: \n\n')
+            print('Proveedor guardado con exito!!!')
+            print('\nAsocie el proveedor con la categoria que provee: \n\n')
             gestor_categorias.mostrar_categorias() #muestra las categorias disponibles
             while True:
                 print(F'PRESIONE (0) PARA FINALIZAR LA ASIGNACIÓN DE CATEGORIAS AL PROVEEDOR {nombre}')

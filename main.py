@@ -31,8 +31,9 @@ def menu_principal(empresa):
         fin_menu = True
         administrador = Perfiles.LoginAdmin() #contiene  el inicio de sesion
         dinamica_admin = Perfiles.EntornoAdmin() #Contiene la dinamica para el menu admin
-        gestor_categorias = Categorias.GestionCategorias() #Contiene la dinamica para gestionar las categorias
-        gestor_proveedores =  Proveedores.GestionProveedores()
+        visitante =  Perfiles.Invitado()
+        gestor_proveedores = Proveedores.GestionProveedores()
+        gestor_categorias = Categorias.GestionCategorias(gestor_proveedores) #Contiene la dinamica para gestionar las categorias
         gestor_productos = Productos.GestionProductos()
         gestor_compras = Compras.GestionCompras()
         gestor_empleados = Empleados.GestionEmpleados()
@@ -59,7 +60,15 @@ def menu_principal(empresa):
                         gestor_ventas.realizar_venta(gestor_clientes, gestor_empleados, gestor_productos)
                     case 3:
                         print('\nVisitante')
-                        print('Funcion en construccion')
+                        print('PRODUCTOS: ')
+                        visitante.mostrar_productos_invitado(gestor_productos)
+                        print('----'*40)
+                        print('\nPROVEEDORES: ')
+                        visitante.mostrar_proveedores_invitado(gestor_proveedores)
+                        print('----' * 40)
+                        print('\nCATEGORIAS: ')
+                        visitante.mostrar_categorias_invitado(gestor_categorias)
+                        print('----' * 40)
 
                     case 4:
                         print('Gracias por usar el sistema')

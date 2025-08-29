@@ -70,7 +70,6 @@ class GestionCompras:
         id_compra = len(list(self.diccionario_historial_compras)) + 30  # Aquí le asigna de forma automática el ID
         fecha_actual = datetime.now().date()  # guarda la fecha
         productos_abastecidos = gestor_productos.abastecer() #Diccionario de articulos abastecidos
-
         # Se crea el objeto y para guardar los productos ingresados
         compra_tmp = Compra(id_compra, fecha_actual)
         compra_tmp.diccionario_articulos_comprados = productos_abastecidos  # aquÍ se guardan solo los productos abastecidos
